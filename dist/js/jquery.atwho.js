@@ -544,9 +544,6 @@ View = (function() {
 
   View.prototype.reposition = function(rect) {
     var offset, _ref;
-    if (rect.bottom + this.$el.height() - $(window).scrollTop() > $(window).height()) {
-      rect.bottom = rect.top - this.$el.height();
-    }
     offset = {
       left: rect.left,
       top: rect.bottom
