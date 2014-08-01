@@ -108,7 +108,7 @@ module.exports = (grunt) ->
 
   # alias
   grunt.registerTask 'update-version', 'json-replace'
-  grunt.registerTask 'compile', ['coffee', 'concat', 'copy', 'cssmin']
+  grunt.registerTask 'compile', ['coffee', 'concat', 'copy', 'cssmin','uglify']
 
   grunt.registerTask "server", ["compile", "jasmine:dist:build", "connect"]
   grunt.registerTask "test", ["compile", "jasmine"]
