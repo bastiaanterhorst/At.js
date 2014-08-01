@@ -31,6 +31,7 @@ $.fn.atwho.default =
   at: undefined
   alias: undefined
   data: null
+  wrapper: "<div class='atwho-view'><ul class='atwho-view-ul'></ul></div>"
   tpl: "<li data-value='${atwho-at}${name}'>${name}</li>"
   insert_tpl: "<span id='${id}'>${atwho-data-value}</span>"
   callbacks: DEFAULT_CALLBACKS

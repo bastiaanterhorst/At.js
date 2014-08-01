@@ -4,13 +4,16 @@ class View
 
   # @param controller [Object] The Controller.
   constructor: (@context) ->
-    @$el = $("<div class='atwho-view'><ul class='atwho-view-ul'></ul></div>")
+
     @timeout_id = null
-    # create HTML DOM of list view if it does not exist
-    @context.$el.append(@$el)
-    this.bind_event()
 
   init: ->
+    unless @$el?
+      @$el = $(@context.get_opt('wrapper'))
+      @context.$el.append(@$el)
+      # create HTML DOM of list view if it does not exist
+      this.bind_event()
+      
     id = @context.get_opt("alias") || @context.at.charCodeAt(0)
     @$el.attr('id': "at-view-#{id}")
 

@@ -1,4 +1,4 @@
-/*! jquery.atwho - v0.5.0 - 2014-07-14
+/*! jquery.atwho - v0.5.0 - 2014-08-01
 * Copyright (c) 2014 chord.luo <chord.luo@gmail.com>; 
 * homepage: http://ichord.github.com/At.js 
 * Licensed MIT
@@ -491,14 +491,16 @@ Model = (function() {
 View = (function() {
   function View(context) {
     this.context = context;
-    this.$el = $("<div class='atwho-view'><ul class='atwho-view-ul'></ul></div>");
     this.timeout_id = null;
-    this.context.$el.append(this.$el);
-    this.bind_event();
   }
 
   View.prototype.init = function() {
     var id;
+    if (this.$el == null) {
+      this.$el = $(this.context.get_opt('wrapper'));
+      this.context.$el.append(this.$el);
+      this.bind_event();
+    }
     id = this.context.get_opt("alias") || this.context.at.charCodeAt(0);
     return this.$el.attr({
       'id': "at-view-" + id
@@ -786,7 +788,7 @@ $.fn.atwho = function(method) {
   _args = arguments;
   $('body').append($CONTAINER);
   result = null;
-  this.filter('textarea, input, [contenteditable=true]').each(function() {
+  this.filter('textarea, input, [contenteditable=""], [contenteditable=true]').each(function() {
     var $this, app;
     if (!(app = ($this = $(this)).data("atwho"))) {
       $this.data('atwho', (app = new App(this)));
@@ -806,6 +808,7 @@ $.fn.atwho["default"] = {
   at: void 0,
   alias: void 0,
   data: null,
+  wrapper: "<div class='atwho-view'><ul class='atwho-view-ul'></ul></div>",
   tpl: "<li data-value='${atwho-at}${name}'>${name}</li>",
   insert_tpl: "<span id='${id}'>${atwho-data-value}</span>",
   callbacks: DEFAULT_CALLBACKS,
